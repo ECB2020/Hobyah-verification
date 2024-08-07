@@ -1,0 +1,419 @@
+Processing "/Users/ecb/Documents/sandboxes/Hobyah/verification+validation/ok-040-traffic-verification2.txt"
+  using Hobyah.py, run at 11:50 on 24 Apr 2024 by ecb.
+Read the contents of "ok-040-traffic-verification2.txt".
+Found the "begin settings" line.
+Found the "end plots" line.
+Processed all the lines of entry in blocks.
+Comments at the top of the file were as follows:
+  Test input file for Hobyah, a 1D tunnel vent program.
+  March 2024
+  A file that verifies the calculation of stationary road traffic in a
+  three tunnels.  In all tunnels, the majority of the losses are in
+  traffic drag, not inlet/outlet losses or tunnel friction.
+  The three tunnels have the same airflow but caused in different ways:
+   * in the first tunnel, the back portal and forward portals are open
+     to atmosphere with fixed pressures.
+   * in the second tunnel, the back portal has a fixed velocity (set
+     from the results of the first tunnel).
+   * in the third tunnel, the forward portal has a fixed velocity (set
+     from the results of the first tunnel).
+  
+  Portals with fixed pressure and fixed velocity are solved in different
+  routines, so we need test files to check that their calculations don't
+  differ.
+  
+  In this case the velocity being set at the back end of tunnel "second"
+  in this file is 8.739696 m/s, the velocity being set at the forward
+  end of tunnel "third" is 8.742097 m/s.
+  
+  These two velocities are taken from the velocities at the back end and
+  forward end of tunnel "first" respectively (from an initial run).
+  
+  The way to verify that they have the same calculation is to look at
+  the pressure profiles of the three tunnels.  If the traffic drag
+  calculation in the fixed velocity boundary condition is calculated
+  differently to the traffic drag in the pressure boundary condition,
+  the pressure profiles will differ.
+  
+  Outcome:
+  
+  The velocities are the back ends and forward ends of the tunnels
+  are as follows (air velocity in the variable named 'v_bin'):
+  
+      Tunnel      Back end        Forward end
+       name     velocity (m/s)   velocity (m/s)
+      ------    --------------   --------------
+      first        8.739636         8.742097      (both ends fixed pressures)
+      second       8.739636         8.742097      (back end fixed velocity)
+      third        8.739636         8.742097      (fwd end fixed velocity)
+  
+  The pressures are the back ends and forward ends of the tunnels
+  are as follows (gauge total pressure in the variable named
+  'p_tot_bin'):
+  
+      Tunnel      Back end        Forward end
+       name     pressure (Pa)    pressure (Pa)
+      ------    -------------    -------------
+      first       19.992597        -20.007410
+      second      19.992598        -20.007410
+      third       19.992598        -20.007413
+  
+  These pressures are equal down to the fifth decimal place, so we can
+  that the traffic drag calculations at fixed velocity portals are the
+  same as the traffic drag calculations at fixed pressure portals.
+Processing a sub-dictionary of "route route1", with sub-key "tunnels".
+Processing a sub-dictionary of "route route1", with sub-key "lanes".
+Processing a sub-dictionary of "route route2", with sub-key "tunnels".
+Processing a sub-dictionary of "route route2", with sub-key "lanes".
+Processing a sub-dictionary of "route route3", with sub-key "tunnels".
+Processing a sub-dictionary of "route route3", with sub-key "lanes".
+Processing a sub-dictionary of "plots", with sub-key "page".
+Processing a sub-dictionary of "page", with sub-key "graph".
+Processing a sub-dictionary of "plots", with sub-key "page".
+Processing a sub-dictionary of "page", with sub-key "graph".
+Finished splitting all the blocks up.
+Found 11 blocks in the file.
+There were no wrongly-nested blocks.
+There were no name clashes at any level.
+Added settings:
+   debug1: False
+   serial: False
+   nocalc: False
+   dudbins: False
+   file_count: 1
+   script_name: Hobyah.py
+   script_date: 11:27 on 24 Apr 2024
+   show_errors: False
+   nofortran: True
+   user_name: ecb
+   when_who: 11:50 on 24 Apr 2024 by ecb
+   file_name: ok-040-traffic-verification2.txt
+   dir_name: /Users/ecb/Documents/sandboxes/Hobyah/verification+validation/
+   file_stem: ok-040-traffic-verification2
+   file_ext: .txt
+   named: ['tunnel', 'route', 'data', 'files', 'fanchar', 'traintype', 'schedule', 'tunnelclones', 'trafficsteady', 'gradients', 'page', 'timeloop', 'filesloop', 'graph', 'image']
+   unnamed: ['settings', 'testblock', 'constants', 'plotcontrol', 'sectypes', 'gradients', 'elevations', 'heights', 'tunnels', 'speedlimits', 'lanes', 'sub_testblock', 'traffictypes', 'jetfantypes', 'plots', 'verbatim', 'csv', 'image', 'page', 'timeloop', 'filesloop', 'graph', 'image']
+   duplicables: ['testblock', 'constants', 'sectypes', 'page', 'graph', 'timeloop', 'filesloop', 'verbatim', 'data', 'image', 'fanchar', 'schedule', 'tunnelclones', 'lanes', 'trafficsteady']
+   reserved: ['calc', 'begin', 'end', 'title', 'xlabel', 'ylabel', 'x2label', 'y2label', 'xrange', 'yrange', 'x2range', 'y2range', 'margins', 'verbatim', 'data']
+   version: 1
+   runtype: calc
+   frictiontype: fanning
+   frictionapprox: colebrook
+   units: si
+   qa1: 2
+   qa2: Software testing
+   qa3: Files that work and test different capabilities
+   p_atm: 101325.0
+   rho_atm: 1.2
+   header: underfoot
+   footer: on
+   plotnames: .txt
+   images: optional
+   solver: moc2
+   autokeys: off
+   keytextscale: 0.65
+   max_roughness: 0.5
+   gamma: 1.4
+   max_vel: 20.0
+   rise_time: 2.0
+   time_accuracy: 8
+   g: 9.80665
+   min_area: 0.1
+   jetfancounts: integers
+   aero_step: 0.1
+   aero_time: 103.3
+   block_index: unnamed
+Added sectype:
+   c+c1: [103.0, 55.0, -1e-07, '', {}, 12]
+Added tunnel first:
+   back: (0.0, 'portal', 20.0, 'C+C1', '', {'zeta_in': '0.0', 'zeta_out': '0.0'}, 15)
+   fwd: (200.0, 'portal', -20.0, '', {'zeta_in': '0.0', 'zeta_out': '0.0'}, 16)
+   block_index: ('first', 14)
+Added tunnel second:
+   back: (0.0, 'v_inflow', 8.739636, 'C+C1', '', {'zeta_in': '0.0', 'zeta_out': '0.0'}, 19)
+   fwd: (200.0, 'portal', -20.0, '', {'zeta_in': '0.0', 'zeta_out': '0.0'}, 20)
+   block_index: ('second', 18)
+Added tunnel third:
+   back: (0.0, 'portal', 20.0, 'C+C1', '', {'zeta_in': '0.0', 'zeta_out': '0.0'}, 23)
+   fwd: (200.0, 'v_outflow', 8.742097, '', {'zeta_in': '0.0', 'zeta_out': '0.0'}, 24)
+   block_index: ('third', 22)
+Added route route1:
+   origin: (-1.0, {}, 33)
+   portal: (0.0, {}, 34)
+   begin#35: ('tunnels', '', {}, 35)
+   begin#38: ('lanes', '', {}, 38)
+   block_index: ('route1', 32)
+   lanes: ([2, 2], [1400.0, inf], 38)
+   speedlimits: Not set
+   tunnel_names: ['first']
+   tunnel_chs: [0.0, 200.0]
+   gradients2: [0.0, 0.0]
+   elevations: [0.0, 0.0]
+   elevgrad_chs: [-1.0, 200.11]
+   gradients: ([0.0, 0.0], [-1.0, 200.11])
+   profile: ('none', nan)
+   route2tun: [(1.0, 0.0)]
+   signed_names: ['first']
+   tunnel_dists: [(0.0, 200.0)]
+Added route route2:
+   origin: (-1.0, {}, 43)
+   portal: (0.0, {}, 44)
+   begin#45: ('tunnels', '', {}, 45)
+   begin#48: ('lanes', '', {}, 48)
+   block_index: ('route2', 42)
+   lanes: ([2, 2], [1400.0, inf], 48)
+   speedlimits: Not set
+   tunnel_names: ['second']
+   tunnel_chs: [0.0, 200.0]
+   gradients2: [0.0, 0.0]
+   elevations: [0.0, 0.0]
+   elevgrad_chs: [-1.0, 200.11]
+   gradients: ([0.0, 0.0], [-1.0, 200.11])
+   profile: ('none', nan)
+   route2tun: [(1.0, 0.0)]
+   signed_names: ['second']
+   tunnel_dists: [(0.0, 200.0)]
+Added route route3:
+   origin: (-1.0, {}, 53)
+   portal: (0.0, {}, 54)
+   begin#55: ('tunnels', '', {}, 55)
+   begin#58: ('lanes', '', {}, 58)
+   block_index: ('route3', 52)
+   lanes: ([2, 2], [1400.0, inf], 58)
+   speedlimits: Not set
+   tunnel_names: ['third']
+   tunnel_chs: [0.0, 200.0]
+   gradients2: [0.0, 0.0]
+   elevations: [0.0, 0.0]
+   elevgrad_chs: [-1.0, 200.11]
+   gradients: ([0.0, 0.0], [-1.0, 200.11])
+   profile: ('none', nan)
+   route2tun: [(1.0, 0.0)]
+   signed_names: ['third']
+   tunnel_dists: [(0.0, 200.0)]
+Road traffic drag calculation will include a blockage term.
+Please ensure that the vehicle drag factors below do not account for blockage.
+ Vehicle   Area  Drag factor   PCU       Mass          Vehicle speed limits on uphill grades
+   name    (m^2)    (-)       value    (tonnes)          Limiting gradient     Speed limit
+---------------------------------------------------------------------------------------------
+   car      2.0     0.35       1.0     Not used         Flat to vertical:     no speed limit
+   lcv      4.0     0.8        1.0     Not used         Flat to vertical:     no speed limit
+   hgv      6.0     0.9        3.0     Not used         Flat to vertical:     no speed limit
+
+Route "route1" has stationary traffic at 165 PCU/lane-km
+  Mean PCU value calculation:
+         1*1600 + 1*205 + 3*291
+         ---------------------- = 1.278 PCU/veh
+            1600 + 205 + 291   
+  So 165 PCU/lane-km is equivalent to 129.141 veh/lane-km.
+   car:    98.58 veh/lane-km   (98.58 PCU/lane-km)
+   lcv:    12.63 veh/lane-km   (12.63 PCU/lane-km)
+   hgv:    17.93 veh/lane-km   (53.79 PCU/lane-km)
+ * The tunnels start at chainage 0 and stop at chainage 200.
+ * The vehicles start at chainage 0 and stop at chainage 200.
+
+Route "route2" has stationary traffic at 165 PCU/lane-km
+  Mean PCU value calculation:
+         1*1600 + 1*205 + 3*291
+         ---------------------- = 1.278 PCU/veh
+            1600 + 205 + 291   
+  So 165 PCU/lane-km is equivalent to 129.141 veh/lane-km.
+   car:    98.58 veh/lane-km   (98.58 PCU/lane-km)
+   lcv:    12.63 veh/lane-km   (12.63 PCU/lane-km)
+   hgv:    17.93 veh/lane-km   (53.79 PCU/lane-km)
+ * The tunnels start at chainage 0 and stop at chainage 200.
+ * The vehicles start at chainage 0 and stop at chainage 200.
+
+Route "route3" has stationary traffic at 165 PCU/lane-km
+  Mean PCU value calculation:
+         1*1600 + 1*205 + 3*291
+         ---------------------- = 1.278 PCU/veh
+            1600 + 205 + 291   
+  So 165 PCU/lane-km is equivalent to 129.141 veh/lane-km.
+   car:    98.58 veh/lane-km   (98.58 PCU/lane-km)
+   lcv:    12.63 veh/lane-km   (12.63 PCU/lane-km)
+   hgv:    17.93 veh/lane-km   (53.79 PCU/lane-km)
+ * The tunnels start at chainage 0 and stop at chainage 200.
+ * The vehicles start at chainage 0 and stop at chainage 200.
+Tunnel "first" has traffic:
+>    Trafficsteady block "going-east" has stationary traffic
+>    in tunnel "first".  Densities are calculated as
+>    follows (for each block of lanes in the route) using
+>    a base traffic density of 165 PCU/lane-km:
+>  Lane/traffic block: |   1st          
+>   Start distance:    |    0       m   
+>    Stop distance:    |   200      m   
+>  "route1" traffic:   | Is here        
+>  car flow (1 PCU):   |   1600   veh/hr
+>  lcv flow (1 PCU):   |   205    veh/hr
+>  hgv flow (3 PCU):   |   291    veh/hr
+> Vehicle flow totals: |   2096   veh/hr
+>   Mean PCU value:    |  1.278  PCU/veh
+>    car PCU-flow:     |   1600   PCU/hr
+>    lcv PCU-flow:     |   205    PCU/hr
+>    hgv PCU-flow:     |   873    PCU/hr
+>   PCU flow totals:   |   2678   PCU/hr
+>     Lane counts:     |    2     lanes 
+>     car density:     |  197.16  veh/km
+>     lcv density:     |  25.26   veh/km
+>     hgv density:     |  35.86   veh/km
+Tunnel "second" has traffic:
+>    Trafficsteady block "going-east" has stationary traffic
+>    in tunnel "second".  Densities are calculated as
+>    follows (for each block of lanes in the route) using
+>    a base traffic density of 165 PCU/lane-km:
+>  Lane/traffic block: |   1st          
+>   Start distance:    |    0       m   
+>    Stop distance:    |   200      m   
+>  "route2" traffic:   | Is here        
+>  car flow (1 PCU):   |   1600   veh/hr
+>  lcv flow (1 PCU):   |   205    veh/hr
+>  hgv flow (3 PCU):   |   291    veh/hr
+> Vehicle flow totals: |   2096   veh/hr
+>   Mean PCU value:    |  1.278  PCU/veh
+>    car PCU-flow:     |   1600   PCU/hr
+>    lcv PCU-flow:     |   205    PCU/hr
+>    hgv PCU-flow:     |   873    PCU/hr
+>   PCU flow totals:   |   2678   PCU/hr
+>     Lane counts:     |    2     lanes 
+>     car density:     |  197.16  veh/km
+>     lcv density:     |  25.26   veh/km
+>     hgv density:     |  35.86   veh/km
+Tunnel "third" has traffic:
+>    Trafficsteady block "going-east" has stationary traffic
+>    in tunnel "third".  Densities are calculated as
+>    follows (for each block of lanes in the route) using
+>    a base traffic density of 165 PCU/lane-km:
+>  Lane/traffic block: |   1st          
+>   Start distance:    |    0       m   
+>    Stop distance:    |   200      m   
+>  "route3" traffic:   | Is here        
+>  car flow (1 PCU):   |   1600   veh/hr
+>  lcv flow (1 PCU):   |   205    veh/hr
+>  hgv flow (3 PCU):   |   291    veh/hr
+> Vehicle flow totals: |   2096   veh/hr
+>   Mean PCU value:    |  1.278  PCU/veh
+>    car PCU-flow:     |   1600   PCU/hr
+>    lcv PCU-flow:     |   205    PCU/hr
+>    hgv PCU-flow:     |   873    PCU/hr
+>   PCU flow totals:   |   2678   PCU/hr
+>     Lane counts:     |    2     lanes 
+>     car density:     |  197.16  veh/km
+>     lcv density:     |  25.26   veh/km
+>     hgv density:     |  35.86   veh/km
+Road traffic in tunnel "first":
+   Start   |   Stop   |        |  Vehicle   | Gradient | Vehicle
+  distance | distance | Speed  |  density   | vehicles |   type 
+    (m)    |   (m)    | (km/h) |  (veh/km)  |  are on  |        
+     0     |   200    |   0    | 197.162061 |    0     |   car  
+     0     |   200    |   0    | 25.261389  |    0     |   lcv  
+     0     |   200    |   0    |  35.85885  |    0     |   hgv  
+Road traffic in tunnel "second":
+   Start   |   Stop   |        |  Vehicle   | Gradient | Vehicle
+  distance | distance | Speed  |  density   | vehicles |   type 
+    (m)    |   (m)    | (km/h) |  (veh/km)  |  are on  |        
+     0     |   200    |   0    | 197.162061 |    0     |   car  
+     0     |   200    |   0    | 25.261389  |    0     |   lcv  
+     0     |   200    |   0    |  35.85885  |    0     |   hgv  
+Road traffic in tunnel "third":
+   Start   |   Stop   |        |  Vehicle   | Gradient | Vehicle
+  distance | distance | Speed  |  density   | vehicles |   type 
+    (m)    |   (m)    | (km/h) |  (veh/km)  |  are on  |        
+     0     |   200    |   0    | 197.162061 |    0     |   car  
+     0     |   200    |   0    | 25.261389  |    0     |   lcv  
+     0     |   200    |   0    |  35.85885  |    0     |   hgv  
+
+Splitting up the tunnels into segments with unique seg_IDs.
+
+ Seg_ID 1, 1st (and only) segment of tunnel "first":
+              Back end: 0.0 m (portal with gauge pressure 20.0 Pa)
+           Forward end: 200.0 m (portal with gauge pressure -20.0 Pa)
+        Segment length: 200.0 m
+          Segment area: 103.0 m^2
+             Perimeter: 55.0 m
+    Hydraulic diameter: 7.4909 m
+     Fixed Fanning c_f: 1e-07
+    Fixed Darcy lambda: 4e-07
+      Fixed Atkinson k: 6e-08 kg/m^3
+      Back inflow zeta: 0.0    (zeta_bf)
+     Back outflow zeta: 0.0    (zeta_fb)
+  Forward outflow zeta: 0.0    (zeta_bf)
+   Forward inflow zeta: 0.0    (zeta_fb)
+        Count of cells: 5
+           Cell length: 40.0 m
+   Count of gridpoints: 6
+
+ Seg_ID 2, 1st (and only) segment of tunnel "second":
+              Back end: 0.0 m (portal with outflow 8.739636 m/s)
+           Forward end: 200.0 m (portal with gauge pressure -20.0 Pa)
+        Segment length: 200.0 m
+          Segment area: 103.0 m^2
+             Perimeter: 55.0 m
+    Hydraulic diameter: 7.4909 m
+     Fixed Fanning c_f: 1e-07
+    Fixed Darcy lambda: 4e-07
+      Fixed Atkinson k: 6e-08 kg/m^3
+      Back inflow zeta: 0.0    (zeta_bf)
+     Back outflow zeta: 0.0    (zeta_fb)
+  Forward outflow zeta: 0.0    (zeta_bf)
+   Forward inflow zeta: 0.0    (zeta_fb)
+        Count of cells: 5
+           Cell length: 40.0 m
+   Count of gridpoints: 6
+
+ Seg_ID 3, 1st (and only) segment of tunnel "third":
+              Back end: 0.0 m (portal with gauge pressure 20.0 Pa)
+           Forward end: 200.0 m (portal with outflow -8.742097 m/s)
+        Segment length: 200.0 m
+          Segment area: 103.0 m^2
+             Perimeter: 55.0 m
+    Hydraulic diameter: 7.4909 m
+     Fixed Fanning c_f: 1e-07
+    Fixed Darcy lambda: 4e-07
+      Fixed Atkinson k: 6e-08 kg/m^3
+      Back inflow zeta: 0.0    (zeta_bf)
+     Back outflow zeta: 0.0    (zeta_fb)
+  Forward outflow zeta: 0.0    (zeta_bf)
+   Forward inflow zeta: 0.0    (zeta_fb)
+        Count of cells: 5
+           Cell length: 40.0 m
+   Count of gridpoints: 6
+
+There are no joins in this file.
+
+Traffic arrays for calculation (segment-based):
+  Seg_ID 1 (0 to 200 in tunnel "first"):
+    Traffic: 0 to 200, 0 km/h with drag 0.004362795620595 zeta/m
+
+  Seg_ID 2 (0 to 200 in tunnel "second"):
+    Traffic: 0 to 200, 0 km/h with drag 0.004362795620595 zeta/m
+
+  Seg_ID 3 (0 to 200 in tunnel "third"):
+    Traffic: 0 to 200, 0 km/h with drag 0.004362795620595 zeta/m
+
+Print time: 103.0 seconds
+ Tunnel name: "first" (1st segment)
+    Distances: [0.0, 40.0, 80.0, 120.0, 160.0, 200.0]
+   Celerities: [343.80960378150854, 343.8057276685894, 343.80184741210326, 343.79796669039314, 343.79408550567814, 343.79020035716195]
+   Velocities: [8.403137615890378, 8.403629236306633, 8.404139537814158, 8.404650000173884, 8.405160493408316, 8.405653365251412]
+      Density: [1.1998107815619443, 1.1997431496930395, 1.199675448580414, 1.1996077424076181, 1.1995400312143611, 1.1994722539308396]
+     P_static: [101302.63272081947, 101294.63838293153, 101286.63604071632, 101278.63328103992, 101270.63010864236, 101262.61930562588]
+    P_dynamic: [42.36095246049296, 42.363521094031604, 42.366275360426854, 42.36903080157157, 42.37178610829572, 42.374361146557106]
+        P_tot: [101344.99367327997, 101337.00190402556, 101329.00231607675, 101321.00231184148, 101313.00189475066, 101304.99366677244]
+ Tunnel name: "second" (1st segment)
+    Distances: [0.0, 40.0, 80.0, 120.0, 160.0, 200.0]
+   Celerities: [341.8486166352089, 343.8094017683355, 343.809656498578, 343.80991122703375, 343.81016595374643, 343.8104203722807]
+   Velocities: [8.739636, -1.0670463712974017, -1.0670398451808922, -1.0670331817419443, -1.0670263809830114, -1.0670209757170424]
+      Density: [1.1659820773284764, 1.1998072566851588, 1.1998117014101257, 1.199816146117087, 1.199820590806807, 1.1998250301323143]
+     P_static: [97326.58669636108, 101302.21606284996, 101302.74145153056, 101303.26683886135, 101303.7922249326, 101304.31697770236]
+    P_dynamic: [44.52957693357082, 0.6830430474906918, 0.683037222779926, 0.6830312222419174, 0.6830250458815832, 0.6830206530211888]
+        P_tot: [97371.11627329464, 101302.89910589745, 101303.42448875334, 101303.9498700836, 101304.47524997848, 101304.99999835537]
+ Tunnel name: "third" (1st segment)
+    Distances: [0.0, 40.0, 80.0, 120.0, 160.0, 200.0]
+   Celerities: [331.53394519114624, 327.82912119756406, 323.192120675068, 316.7632939546628, 304.9567982771744, 114.86164993941057]
+   Velocities: [203.76959271135445, 215.2405747776499, 230.59528338422663, 253.76897207007363, 301.7071948806061, 8.742097]
+      Density: [1.0003748144608118, 0.9457152417876618, 0.8806970918514904, 0.7965205651332835, 0.6587404584184344, 0.004993418813163389]
+     P_static: [78539.9674673689, 72598.46058832461, 65708.27334286938, 57087.188969146155, 43758.551823567555, 47.05654730634498]
+    P_dynamic: [20768.804988688527, 21906.786668343582, 23415.174921821435, 25647.440948459855, 29981.660084570474, 0.19080916872670778]
+        P_tot: [99308.77245605743, 94505.2472566682, 89123.44826469081, 82734.62991760601, 73740.21190813804, 47.24735647507169]
+Gnuplot returned zero for the 1st call, so all's well.

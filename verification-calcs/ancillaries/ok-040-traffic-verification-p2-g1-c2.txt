@@ -1,0 +1,40 @@
+# Hobyah source file, "ok-040-traffic-verification.txt"
+# Timestamp & user, "14:39 on 25 Apr 2024 by ecb"
+# Project number, "2"
+# Project name, "Software testing"
+# Project description, "Files that work and test different capabilities"
+# 171st line, "profile ptot  calc  route2@-1 lw:=3"
+# Data file name, "ok-040-traffic-verification-p2-g1-c2.txt"
+#
+# Hobyah profile (transient data) QA
+# Name of binary, "ok-040-traffic-verification.hbn"
+# Source name, "ok-040-traffic-verification.txt"
+# Project no., "2"
+# Project name, "Software testing"
+# Description, "Files that work and test different capabilities"
+# Date created, "14:39 on 25 Apr 2024 by ecb"
+# Property plotted, ptot
+# Property description, total pressure
+# Original locator, route2@-1
+# Modified locator, route2@-1.0
+# Plot time wanted, -1.0
+# Plot time used, 5000.0
+#
+# X conversion key, "dist1", converting m to FT by dividing by 0.3048
+# Y conversion key, "press1", converting Pa to IWG by dividing by 249.08853408
+# Auto key, Total pressure along route "route2" at 5000 sec
+# Key used, "{/*0.65 Total pressure along route \"route2\" at 5000 sec}"
+# Multiplier on the X axis (applied first), 1.0
+# Offset added to the X axis (applied second), 0.0
+# Multiplier on the Y axis (applied first), 1.0
+# Offset added to the Y axis (applied second), 0.0
+# X value at which data starts being plotted, -inf
+# X value at which data stops being plotted, inf
+Distance,  Value,  Distance,  Value,  Plot Distance,  Plot value
+ (m),   (Pa),   (ft),   (IWG),   (m),   (Pa),  Location
+0.0,    19.992622588266386,    0.0,    0.08026311874253247,    0.0,    19.992622588266386,    # second@0.0
+40.0,    11.993519378709607,    131.23359580052494,    0.048149624481942786,    40.0,    11.993519378709607,    # second@40.0
+80.0,    3.993964635548764,    262.4671916010499,    0.0160343174779214,    80.0,    3.993964635548764,    # second@80.0
+120.0,    -4.006041727974662,    393.70078740157476,    -0.016082802617835623,    120.0,    -4.006041727974662,    # second@120.0
+160.0,    -12.00649979847367,    524.9343832020998,    -0.04820173615304802,    160.0,    -12.00649979847367,    # second@160.0
+200.0,    -20.00740966279409,    656.1679790026246,    -0.08032248347637026,    200.0,    -20.00740966279409,    # second@200.0

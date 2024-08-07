@@ -1,0 +1,40 @@
+# Hobyah source file, "ok-040-traffic-verification2.txt"
+# Timestamp & user, "11:50 on 24 Apr 2024 by ecb"
+# Project number, "2"
+# Project name, "Software testing"
+# Project description, "Files that work and test different capabilities"
+# 160th line, "profile velocity  calc  route3@-1 lw:=1"
+# Data file name, "ok-040-traffic-verification2-p1-g1-c3.txt"
+#
+# Hobyah profile (transient data) QA
+# Name of binary, "ok-040-traffic-verification2.hbn"
+# Source name, "ok-040-traffic-verification2.txt"
+# Project no., "2"
+# Project name, "Software testing"
+# Description, "Files that work and test different capabilities"
+# Date created, "11:50 on 24 Apr 2024 by ecb"
+# Property plotted, velocity
+# Property description, air velocity
+# Original locator, route3@-1
+# Modified locator, route3@-1.0
+# Plot time wanted, -1.0
+# Plot time used, 103.0
+#
+# X conversion key, "dist1", converting m to FT by dividing by 0.3048
+# Y conversion key, "speed1", converting m/s to FPM by dividing by 0.00508
+# Auto key, Air velocity along route "route3" at 103 sec
+# Key used, "{/*0.65 Air velocity along route \"route3\" at 103 sec}"
+# Multiplier on the X axis (applied first), 1.0
+# Offset added to the X axis (applied second), 0.0
+# Multiplier on the Y axis (applied first), 1.0
+# Offset added to the Y axis (applied second), 0.0
+# X value at which data starts being plotted, -inf
+# X value at which data stops being plotted, inf
+Distance,  Value,  Distance,  Value,  Plot Distance,  Plot value
+ (m),   (m/s),   (ft),   (FPM),   (m),   (m/s),  Location
+0.0,    203.76959271135445,    0.0,    40112.12454947922,    0.0,    203.76959271135445,    # third@0.0
+40.0,    215.2405747776499,    131.23359580052494,    42370.19188536415,    40.0,    215.2405747776499,    # third@40.0
+80.0,    230.59528338422663,    262.4671916010499,    45392.77231972965,    80.0,    230.59528338422663,    # third@80.0
+120.0,    253.76897207007363,    393.70078740157476,    49954.522061038115,    120.0,    253.76897207007363,    # third@120.0
+160.0,    301.7071948806061,    524.9343832020998,    59391.180094607495,    160.0,    301.7071948806061,    # third@160.0
+200.0,    8.742097,    656.1679790026246,    1720.8852362204723,    200.0,    8.742097,    # third@200.0

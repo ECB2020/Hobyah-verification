@@ -1,0 +1,40 @@
+# Hobyah source file, "ok-040-traffic-verification2.txt"
+# Timestamp & user, "11:50 on 24 Apr 2024 by ecb"
+# Project number, "2"
+# Project name, "Software testing"
+# Project description, "Files that work and test different capabilities"
+# 159th line, "profile velocity  calc  route2@-1 lw:=3"
+# Data file name, "ok-040-traffic-verification2-p1-g1-c2.txt"
+#
+# Hobyah profile (transient data) QA
+# Name of binary, "ok-040-traffic-verification2.hbn"
+# Source name, "ok-040-traffic-verification2.txt"
+# Project no., "2"
+# Project name, "Software testing"
+# Description, "Files that work and test different capabilities"
+# Date created, "11:50 on 24 Apr 2024 by ecb"
+# Property plotted, velocity
+# Property description, air velocity
+# Original locator, route2@-1
+# Modified locator, route2@-1.0
+# Plot time wanted, -1.0
+# Plot time used, 103.0
+#
+# X conversion key, "dist1", converting m to FT by dividing by 0.3048
+# Y conversion key, "speed1", converting m/s to FPM by dividing by 0.00508
+# Auto key, Air velocity along route "route2" at 103 sec
+# Key used, "{/*0.65 Air velocity along route \"route2\" at 103 sec}"
+# Multiplier on the X axis (applied first), 1.0
+# Offset added to the X axis (applied second), 0.0
+# Multiplier on the Y axis (applied first), 1.0
+# Offset added to the Y axis (applied second), 0.0
+# X value at which data starts being plotted, -inf
+# X value at which data stops being plotted, inf
+Distance,  Value,  Distance,  Value,  Plot Distance,  Plot value
+ (m),   (m/s),   (ft),   (FPM),   (m),   (m/s),  Location
+0.0,    8.739636,    0.0,    1720.400787401575,    0.0,    8.739636,    # second@0.0
+40.0,    -1.0670463712974017,    131.23359580052494,    -210.04849828689007,    40.0,    -1.0670463712974017,    # second@40.0
+80.0,    -1.0670398451808922,    262.4671916010499,    -210.04721361828587,    80.0,    -1.0670398451808922,    # second@80.0
+120.0,    -1.0670331817419443,    393.70078740157476,    -210.04590191770555,    120.0,    -1.0670331817419443,    # second@120.0
+160.0,    -1.0670263809830114,    524.9343832020998,    -210.04456318563214,    160.0,    -1.0670263809830114,    # second@160.0
+200.0,    -1.0670209757170424,    656.1679790026246,    -210.0434991568981,    200.0,    -1.0670209757170424,    # second@200.0

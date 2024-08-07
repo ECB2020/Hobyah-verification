@@ -1,0 +1,40 @@
+# Hobyah source file, "ok-040-traffic-verification2.txt"
+# Timestamp & user, "11:50 on 24 Apr 2024 by ecb"
+# Project number, "2"
+# Project name, "Software testing"
+# Project description, "Files that work and test different capabilities"
+# 173rd line, "profile ptot  calc  route3@-1 lw:=1"
+# Data file name, "ok-040-traffic-verification2-p2-g1-c3.txt"
+#
+# Hobyah profile (transient data) QA
+# Name of binary, "ok-040-traffic-verification2.hbn"
+# Source name, "ok-040-traffic-verification2.txt"
+# Project no., "2"
+# Project name, "Software testing"
+# Description, "Files that work and test different capabilities"
+# Date created, "11:50 on 24 Apr 2024 by ecb"
+# Property plotted, ptot
+# Property description, total pressure
+# Original locator, route3@-1
+# Modified locator, route3@-1.0
+# Plot time wanted, -1.0
+# Plot time used, 103.0
+#
+# X conversion key, "dist1", converting m to FT by dividing by 0.3048
+# Y conversion key, "press1", converting Pa to IWG by dividing by 249.08853408
+# Auto key, Total pressure along route "route3" at 103 sec
+# Key used, "{/*0.65 Total pressure along route \"route3\" at 103 sec}"
+# Multiplier on the X axis (applied first), 1.0
+# Offset added to the X axis (applied second), 0.0
+# Multiplier on the Y axis (applied first), 1.0
+# Offset added to the Y axis (applied second), 0.0
+# X value at which data starts being plotted, -inf
+# X value at which data stops being plotted, inf
+Distance,  Value,  Distance,  Value,  Plot Distance,  Plot value
+ (m),   (Pa),   (ft),   (IWG),   (m),   (Pa),  Location
+0.0,    -2016.227543942572,    0.0,    -8.09442133251713,    0.0,    -2016.227543942572,    # third@0.0
+40.0,    -6819.752743331803,    131.23359580052494,    -27.378830456890867,    40.0,    -6819.752743331803,    # third@40.0
+80.0,    -12201.551735309185,    262.4671916010499,    -48.984798840200334,    80.0,    -12201.551735309185,    # third@80.0
+120.0,    -18590.370082393987,    393.70078740157476,    -74.63358420353183,    120.0,    -18590.370082393987,    # third@120.0
+160.0,    -27584.788091861963,    524.9343832020998,    -110.74290590590786,    160.0,    -27584.788091861963,    # third@160.0
+200.0,    -101277.75264352493,    656.1679790026246,    -406.593394664234,    200.0,    -101277.75264352493,    # third@200.0

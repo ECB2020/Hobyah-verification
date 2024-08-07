@@ -1,0 +1,175 @@
+Test input file for Hobyah, a 1D tunnel vent program.
+March 2024
+A file that verifies the calculation of stationary road traffic in a
+three tunnels.  In all tunnels, the majority of the losses are in
+traffic drag, not inlet/outlet losses or tunnel friction.
+The three tunnels have the same airflow but caused in different ways:
+ * in the first tunnel, the back portal and forward portals are open
+   to atmosphere with fixed pressures.
+ * in the second tunnel, the back portal has a fixed velocity (set
+   from the results of the first tunnel).
+ * in the third tunnel, the forward portal has a fixed velocity (set
+   from the results of the first tunnel).
+
+Portals with fixed pressure and fixed velocity are solved in different
+routines, so we need test files to check that their calculations don't
+differ.
+
+In this case the velocity being set at the back end of tunnel "second"
+in this file is 8.739696 m/s, the velocity being set at the forward
+end of tunnel "third" is 8.742097 m/s.
+
+These two velocities are taken from the velocities at the back end and
+forward end of tunnel "first" respectively (from an initial run).
+
+The way to verify that they have the same calculation is to look at
+the pressure profiles of the three tunnels.  If the traffic drag
+calculation in the fixed velocity boundary condition is calculated
+differently to the traffic drag in the pressure boundary condition,
+the pressure profiles will differ.
+
+Outcome:
+
+The velocities are the back ends and forward ends of the tunnels
+are as follows (air velocity in the variable named 'v_bin'):
+
+    Tunnel      Back end        Forward end
+     name     velocity (m/s)   velocity (m/s)
+    ------    --------------   --------------
+    first        8.739636         8.742097      (both ends fixed pressures)
+    second       8.739636         8.742097      (back end fixed velocity)
+    third        8.739636         8.742097      (fwd end fixed velocity)
+
+The pressures are the back ends and forward ends of the tunnels
+are as follows (gauge total pressure in the variable named
+'p_tot_bin'):
+
+    Tunnel      Back end        Forward end
+     name     pressure (Pa)    pressure (Pa)
+    ------    -------------    -------------
+    first       19.992597        -20.007410
+    second      19.992598        -20.007410
+    third       19.992598        -20.007413
+
+These pressures are equal down to the fifth decimal place, so we can
+that the traffic drag calculations at fixed velocity portals are the
+same as the traffic drag calculations at fixed pressure portals.
+
+begin settings
+  version 1
+  runtype calc
+  frictiontype Fanning
+  QA1 2
+  QA2 Software testing
+  QA3 Files that work and test different capabilities
+  header underfoot
+  aero_step 0.1
+  aero_time 5000.
+end settings
+
+begin sectypes
+  C+C1    103   55   -0.0000001  # Negligible friction factor
+end sectypes
+
+begin tunnel first
+  back  0   portal +20  C+C1    zeta_in:=0.0  zeta_out:=0.0
+  fwd  200  portal -20          zeta_in:=0.0  zeta_out:=0.0
+end tunnel
+
+begin tunnel second
+  back  0   v_inflow 8.739636  C+C1  zeta_in:=0.0  zeta_out:=0.0
+  fwd  200  portal -20               zeta_in:=0.0  zeta_out:=0.0
+end tunnel
+begin tunnel third
+  back  0   portal 20  C+C1     zeta_in:=0.0  zeta_out:=0.0
+  fwd  200  v_outflow 8.742097  zeta_in:=0.0  zeta_out:=0.0
+end tunnel
+
+begin traffictypes
+  calculate with blockage correction term
+# keyword   name   area  C_d  PCU/veh
+  vehicle   car    2.0   0.35    1
+  vehicle   LCV    4.0   0.8     1
+  vehicle   HGV    6.0   0.9     3
+end traffictypes
+
+begin route route1
+  origin -1
+  portal 0
+  begin tunnels
+    first
+  end tunnels
+  begin lanes
+    # lane count     chainage it
+    #   (> 0)      applies down to
+          2           1400
+  end lanes
+end route
+
+begin route route2
+  origin -1
+  portal 0
+  begin tunnels
+    second
+  end tunnels
+  begin lanes
+    # lane count     chainage it
+    #   (> 0)      applies down to
+          2           1400
+  end lanes
+end route
+
+begin route route3
+  origin -1
+  portal 0
+  begin tunnels
+    third
+  end tunnels
+  begin lanes
+    # lane count     chainage it
+    #   (> 0)      applies down to
+          2           1400
+  end lanes
+end route
+
+begin trafficsteady going-east
+  routes  route1    route2    route3
+    car     1600     1600      1600
+    LCV      205      205       205
+    HGV      291      291       291
+  standstill  route1  165 PCU/lane-km  up_ptl  down_ptl
+  standstill  route2  165 PCU/lane-km  up_ptl  down_ptl
+  standstill  route3  165 PCU/lane-km  up_ptl  down_ptl
+end trafficsteady
+
+begin plots
+  pagesize custom 11.3  6
+  fontsize 10
+  linewidth 1
+  begin page # 1 # ignore
+    begin graph
+      title # Air velocity profile at the last timestep
+      xlabel   Distance (m)
+      ylabel   Air velocity (m/s)
+      xrange  0  200  *200
+      yrange  *4.5  *4.6  *200
+      margins 0.15  0.95    0.2  0.95
+      profile velocity  calc  route1@-1 lw:=5
+      profile velocity  calc  route2@-1 lw:=3
+      profile velocity  calc  route3@-1 lw:=1
+    end graph
+  end page
+  begin page # 2 # ignore
+    begin graph
+      title # Air velocity profile at the last timestep
+      xlabel   Distance (m)
+      ylabel   Gauge total pressure (Pa)
+      xrange  0  200  *200
+      yrange  *4.5  *4.6  *200
+      margins 0.15  0.95    0.2  0.95
+      profile ptot  calc  route1@-1 lw:=5
+      profile ptot  calc  route2@-1 lw:=3
+      profile ptot  calc  route3@-1 lw:=1
+    end graph
+  end page
+end plots

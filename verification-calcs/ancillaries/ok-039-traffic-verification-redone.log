@@ -1,0 +1,210 @@
+Processing "/Users/ecb/Documents/sandboxes/Hobyah/verification+validation/ok-039-traffic-verification-redone.txt"
+  using Hobyah.py, run at 11:38 on 24 Apr 2024 by ecb.
+Read the contents of "ok-039-traffic-verification-redone.txt".
+Found the "begin settings" line.
+Found the "end plots" line.
+Processed all the lines of entry in blocks.
+Comments at the top of the file were as follows:
+  Test input file for Hobyah, a 1D tunnel vent program.
+  March 2024
+  A file that verifies the calculation of stationary road traffic in a
+  single tunnel.  Three types of stationary traffic fill the tunnel end
+  to end: cars, Light Commercial Vehicles (LCVs) and Heavy Goods Vehicles
+  (HGVs).
+  
+  Traffic is set by defining traffic types, defining a route (with counts
+  of lanes), then defining a "trafficsteady" block that puts traffic into
+  the route.  The program figures out which tunnels to put the traffic
+  in and what the density of the traffic is.  It does this based on the
+  traffic extents, traffic mix and the density of stationary traffic
+  (all set in the "trafficsteady" block and the count of lanes in the
+  tunnel (set in the route definition).  This may come across as
+  needlessly complex, but it makes it easy to define traffic in large road
+  tunnel networks (like Westconnex in Australia).
+  
+  The traffic blockage correction is turned off in the calculation.
+  
+  The result can be compared to the incompressible calculation in the
+  spreadsheet named "slug-flow-ok-039-traffic-verification.ods".
+  
+  The spreadsheet calculates an air velocity of 4.525630 m/s.
+  
+  The compressible calculation in Hobyah calculates air velocities
+  between 4.525234 m/s (at the inlet) and 4.525922 m/s (at the outlet).
+  The slight change in air speed over the length of the tunnel is due
+  to the change in air density along the length of the tunnel in the
+  compressible calculation.
+  
+  The differences are -0.009% (at the inlet) and +0.006% (at the outlet).
+  
+  We can conclude that they give the same answer, accounting for the
+  difference between compressible flow and incompressible flow.
+Processing a sub-dictionary of "route eastbound", with sub-key "tunnels".
+Processing a sub-dictionary of "route eastbound", with sub-key "lanes".
+Processing a sub-dictionary of "plots", with sub-key "page".
+Processing a sub-dictionary of "page", with sub-key "graph".
+Finished splitting all the blocks up.
+Found 7 blocks in the file.
+There were no wrongly-nested blocks.
+There were no name clashes at any level.
+Added settings:
+   debug1: False
+   serial: False
+   nocalc: False
+   dudbins: False
+   file_count: 1
+   script_name: Hobyah.py
+   script_date: 11:27 on 24 Apr 2024
+   show_errors: False
+   nofortran: True
+   user_name: ecb
+   when_who: 11:38 on 24 Apr 2024 by ecb
+   file_name: ok-039-traffic-verification-redone.txt
+   dir_name: /Users/ecb/Documents/sandboxes/Hobyah/verification+validation/
+   file_stem: ok-039-traffic-verification-redone
+   file_ext: .txt
+   named: ['tunnel', 'route', 'data', 'files', 'fanchar', 'traintype', 'schedule', 'tunnelclones', 'trafficsteady', 'gradients', 'page', 'timeloop', 'filesloop', 'graph', 'image']
+   unnamed: ['settings', 'testblock', 'constants', 'plotcontrol', 'sectypes', 'gradients', 'elevations', 'heights', 'tunnels', 'speedlimits', 'lanes', 'sub_testblock', 'traffictypes', 'jetfantypes', 'plots', 'verbatim', 'csv', 'image', 'page', 'timeloop', 'filesloop', 'graph', 'image']
+   duplicables: ['testblock', 'constants', 'sectypes', 'page', 'graph', 'timeloop', 'filesloop', 'verbatim', 'data', 'image', 'fanchar', 'schedule', 'tunnelclones', 'lanes', 'trafficsteady']
+   reserved: ['calc', 'begin', 'end', 'title', 'xlabel', 'ylabel', 'x2label', 'y2label', 'xrange', 'yrange', 'x2range', 'y2range', 'margins', 'verbatim', 'data']
+   version: 1
+   runtype: calc
+   frictiontype: fanning
+   frictionapprox: colebrook
+   units: si
+   qa1: 2
+   qa2: Software testing
+   qa3: Files that work and test different capabilities
+   p_atm: 101325.0
+   rho_atm: 1.2
+   header: underfoot
+   footer: on
+   plotnames: .txt
+   images: optional
+   solver: moc2
+   autokeys: off
+   keytextscale: 0.65
+   max_roughness: 0.5
+   gamma: 1.4
+   max_vel: 20.0
+   rise_time: 2.0
+   time_accuracy: 8
+   g: 9.80665
+   min_area: 0.1
+   jetfancounts: integers
+   aero_step: 0.1
+   aero_time: 3000.0
+   block_index: unnamed
+Added sectype:
+   c+c1: [103.0, 55.0, -0.008, '', {}, 12]
+Added tunnel filled:
+   back: (0.0, 'portal', 20.0, 'C+C1', '', {}, 15)
+   fwd: (200.0, 'portal', -20.0, '', {}, 16)
+   block_index: ('filled', 14)
+Added route eastbound:
+   origin: (-1.0, {}, 25)
+   portal: (0.0, {}, 26)
+   begin#27: ('tunnels', '', {}, 27)
+   begin#30: ('lanes', '', {}, 30)
+   block_index: ('eastbound', 24)
+   lanes: ([2, 2], [1400.0, inf], 30)
+   speedlimits: Not set
+   tunnel_names: ['filled']
+   tunnel_chs: [0.0, 200.0]
+   gradients2: [0.0, 0.0]
+   elevations: [0.0, 0.0]
+   elevgrad_chs: [-1.0, 200.11]
+   gradients: ([0.0, 0.0], [-1.0, 200.11])
+   profile: ('none', nan)
+   route2tun: [(1.0, 0.0)]
+   signed_names: ['filled']
+   tunnel_dists: [(0.0, 200.0)]
+Road traffic drag calculation will not include a blockage term.
+Please ensure that the vehicle drag factors below do account for blockage.
+ Vehicle   Area  Drag factor   PCU       Mass          Vehicle speed limits on uphill grades
+   name    (m^2)    (-)       value    (tonnes)          Limiting gradient     Speed limit
+---------------------------------------------------------------------------------------------
+   car      2.0     0.4        1.0     Not used         Flat to vertical:     no speed limit
+   lcv      4.0     0.9        1.0     Not used         Flat to vertical:     no speed limit
+   hgv      6.0     1.0       Varies      22            Flat to vertical:     no speed limit
+Vehicle type "hgv" occupies different amounts of space at different speeds:
+         <=10.0 km/h,          vehicle type occupies 3.0 PCU
+         >10.0 km/h,           vehicle type occupies 2.0 PCU
+
+Route "eastbound" has stationary traffic at 165 PCU/lane-km
+  Mean PCU value calculation:
+         1*1600 + 1*205 + 3*291
+         ---------------------- = 1.278 PCU/veh
+            1600 + 205 + 291   
+  So 165 PCU/lane-km is equivalent to 129.141 veh/lane-km.
+   car:    98.58 veh/lane-km   (98.58 PCU/lane-km)
+   lcv:    12.63 veh/lane-km   (12.63 PCU/lane-km)
+   hgv:    17.93 veh/lane-km   (53.79 PCU/lane-km)
+ * The tunnels start at chainage 0 and stop at chainage 200.
+ * The vehicles start at chainage 0 and stop at chainage 200.
+Tunnel "filled" has traffic:
+>    Trafficsteady block "going-east" has stationary traffic
+>    in tunnel "filled".  Densities are calculated as
+>    follows (for each block of lanes in the route) using
+>    a base traffic density of 165 PCU/lane-km:
+>  Lane/traffic block: |   1st          
+>   Start distance:    |    0       m   
+>    Stop distance:    |   200      m   
+> "eastbound" traffic: | Is here        
+>  car flow (1 PCU):   |   1600   veh/hr
+>  lcv flow (1 PCU):   |   205    veh/hr
+>  hgv flow (3 PCU):   |   291    veh/hr
+> Vehicle flow totals: |   2096   veh/hr
+>   Mean PCU value:    |  1.278  PCU/veh
+>    car PCU-flow:     |   1600   PCU/hr
+>    lcv PCU-flow:     |   205    PCU/hr
+>    hgv PCU-flow:     |   873    PCU/hr
+>   PCU flow totals:   |   2678   PCU/hr
+>     Lane counts:     |    2     lanes 
+>     car density:     |  197.16  veh/km
+>     lcv density:     |  25.26   veh/km
+>     hgv density:     |  35.86   veh/km
+Road traffic in tunnel "filled":
+   Start   |   Stop   |        |  Vehicle   | Gradient | Vehicle
+  distance | distance | Speed  |  density   | vehicles |   type 
+    (m)    |   (m)    | (km/h) |  (veh/km)  |  are on  |        
+     0     |   200    |   0    | 197.162061 |    0     |   car  
+     0     |   200    |   0    | 25.261389  |    0     |   lcv  
+     0     |   200    |   0    |  35.85885  |    0     |   hgv  
+
+Splitting up the tunnels into segments with unique seg_IDs.
+
+ Seg_ID 1, 1st (and only) segment of tunnel "filled":
+              Back end: 0.0 m (portal with gauge pressure 20.0 Pa)
+           Forward end: 200.0 m (portal with gauge pressure -20.0 Pa)
+        Segment length: 200.0 m
+          Segment area: 103.0 m^2
+             Perimeter: 55.0 m
+    Hydraulic diameter: 7.4909 m
+     Fixed Fanning c_f: 0.008
+    Fixed Darcy lambda: 0.032
+      Fixed Atkinson k: 0.0048 kg/m^3
+      Back inflow zeta: 0.5    (zeta_bf)
+     Back outflow zeta: 1.0    (zeta_fb)
+  Forward outflow zeta: 1.0    (zeta_bf)
+   Forward inflow zeta: 0.5    (zeta_fb)
+        Count of cells: 5
+           Cell length: 40.0 m
+   Count of gridpoints: 6
+
+There are no joins in this file.
+
+Traffic arrays for calculation (segment-based):
+  Seg_ID 1 (0 to 200 in tunnel "filled"):
+    Traffic: 0 to 200, 0 km/h with drag 0.00450314319482 zeta/m
+
+Print time: 3000.0 seconds
+ Tunnel name: "filled" (1st segment)
+    Distances: [0.0, 40.0, 80.0, 120.0, 160.0, 200.0]
+   Celerities: [343.82120771610613, 343.8191167576486, 343.8170256592025, 343.8149344207483, 343.81284304226637, 343.8107515237371]
+   Velocities: [4.52523347258894, 4.525371156298871, 4.525508854254971, 4.525646566459654, 4.525784292915096, 4.525922033624268]
+      Density: [1.2000132695889947, 1.1999767804586012, 1.1999402897730016, 1.1999037975320173, 1.1998673037354692, 1.1998308083831764]
+     P_static: [101326.56863475825, 101322.25517058477, 101317.94157503573, 101313.62784809765, 101309.313989757, 101305.00000000012]
+    P_dynamic: [12.28677865444689, 12.287152705047486, 12.287526794361302, 12.287900922394648, 12.288275089152524, 12.288649294644221]
+        P_tot: [101338.8554134127, 101334.54232328982, 101330.22910183009, 101325.91574902005, 101321.60226484617, 101317.28864929476]
+Gnuplot returned zero for the 1st call, so all's well.

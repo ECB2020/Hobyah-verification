@@ -1,0 +1,406 @@
+Hobyah input file for plotting the volume flows in tunnels, volume flows
+of trains and in the annulus around trains.  It was written to check
+whether the calculation of annulus airflows in SESconv.py is correct.
+
+
+begin settings
+  version 1
+  frictiontype Darcy
+  runtype plot
+  header underfoot
+  QA1 4
+  QA2 Hobyah documentation images
+  QA3 Files that generate images used in the documentation
+end settings
+
+
+begin files nicknames
+  normal SES-062-trains-crossing.sbn
+end files
+
+begin data  zeroline
+  -50,   0
+  4450, 0
+end data
+
+
+begin constants
+  time1 72
+  time2 213
+  time3 272
+  time4 294
+end constants
+
+
+begin plots
+  pagesize   custom    11.7   7.5  # Sizes in cm
+  fontsize 11
+  basemargins 0.1  0.9  0.15 0.9
+  begin page # ignore # 1
+    begin graph
+      title "Volume flows of air from SES"
+
+      xlabel "Distance (m)"
+      ylabel "Volume flow (m^3/s)"
+      y2label "Elevation (m)" offset 0, -6.8
+      xrange -100 4500  500
+      yrange -430 380  50
+      y2range -36 126  10
+      begin verbatim
+        set y2tics ("-20" -20, "-10" -10, "0" 0,  "10" 10)
+        set key bottom left reverse Left
+        set linestyle 20 linecolor "yellow" linewidth 0
+        set arrow from first 2200, second -9 to first 2200, second -2 linestyle 6 linewidth 1
+        set arrow from first 100, second 5 to first 200, second 5 linestyle 19 linewidth 1
+        set arrow from first 700, second 5 to first 800, second 5 linestyle 19 linewidth 1
+        set arrow from first 3800, second 5 to first 3700, second 5 linestyle 2 linewidth 1
+        set arrow from first 4300, second 5 to first 4200, second 5 linestyle 2 linewidth 1
+      end verbatim
+      profile  qSES   normal  route1@time1 lt:=20
+#      profile  qcold  normal  route1umd@time1 lw:=1
+      profile  elevations   normal  route1@0 lt:=7 lw:=1 yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route1@0 lt:=6 lw:=1  yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route2@0 lt:=6 lw:=1  axes:=x1y2 areamult:=0.4 yoffset:=6 xoffset:=4400 xmult:=-1 notitle
+      icons    trains normal  route1@time1  axes:=x1y2  height:=4 yoffset:=-1.4
+      icons    trains normal  route2@time1  axes:=x1y2  xoffset:=4400 xmult:=-1 height:=3.5 yoffset:=-1.4 colour:="red"
+      # userdata   zeroline   1  2  lt:=5  lw:=0  notitle
+    end graph
+  end page # 1
+
+  begin page # ignore # 2
+    begin graph
+      title "Volume flows of trains"
+      xlabel "Distance (m)"
+      ylabel "Volume flow (m^3/s)"
+      y2label "Elevation (m)" offset 0, -6.8
+      xrange -100 4500  500
+      yrange -430 380  50
+      y2range -36 126  10
+      begin verbatim
+        set y2tics ("-20" -20, "-10" -10, "0" 0,  "10" 10)
+        set key bottom left reverse Left
+        set linestyle 20 linecolor "yellow" linewidth 0
+        set arrow from first 2200, second -9 to first 2200, second -2 linestyle 6 linewidth 1
+        set arrow from first 0, second 5 to first 100, second 5 linestyle 19 linewidth 1
+        set arrow from first 600, second 5 to first 700, second 5 linestyle 19 linewidth 1
+        set arrow from first 3800, second 5 to first 3700, second 5 linestyle 2 linewidth 1
+        set arrow from first 4480, second 5 to first 4380, second 5 linestyle 2 linewidth 1
+      end verbatim
+      transient qtrains normal train1@0 "{/*0.65 Volume flow of trains moving left to right}" lw:=1  xaxis:=chainage
+      transient qtrains normal train2@0 "{/*0.65 Volume flow of trains moving right to left}" lw:=1  xaxis:=chainage xoffset:=4400 xmult:=-1
+      # profile  qSES   normal  route1@time2 lt:=20
+      # profile  qcold  normal  route1umd@time2 lt:=6 lw:=1
+      profile  elevations   normal  route1@0 lt:=7 lw:=1 yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route1@0 lt:=6 lw:=1  yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route2@0 lt:=6 lw:=1  axes:=x1y2 areamult:=0.4 yoffset:=6 xoffset:=4400 xmult:=-1 notitle
+      icons    trains normal  route1@time2  axes:=x1y2  height:=4 yoffset:=-1.4
+      icons    trains normal  route2@time2  axes:=x1y2  xoffset:=4400 xmult:=-1 height:=3.5 yoffset:=-1.4 colour:="red"
+      # userdata   zeroline   1  2  lt:=5  lw:=0  notitle
+    end graph
+  end page # 2
+
+
+  begin page # ignore # 3
+    begin graph
+      title "Volume flows of air from SES and in the annulus (calculated by SESconv.py)"
+      xlabel "Distance (m)"
+      ylabel "Volume flow (m^3/s)"
+      y2label "Elevation (m)" offset 0, -6.8
+      xrange -100 4500  500
+      yrange -430 380  50
+      y2range -36 126  10
+      begin verbatim
+        set y2tics ("-20" -20, "-10" -10, "0" 0,  "10" 10)
+        set key bottom left reverse Left
+        set linestyle 20 linecolor "yellow" linewidth 0
+        set arrow from first 2200, second -9 to first 2200, second -2 linestyle 6 linewidth 1
+      end verbatim
+      transient qtrains normal train1@0 lw:=1  xaxis:=chainage
+      transient qtrains normal train2@0 lw:=1  xaxis:=chainage xoffset:=4400 xmult:=-1
+      profile  qSES   normal  route1@time2 lt:=20
+      profile  qcold  normal  route1umd@time2 lt:=6 lw:=1
+      profile  elevations   normal  route1@0 lt:=7 lw:=1 yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route1@0 lt:=6 lw:=1  yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route2@0 lt:=6 lw:=1  axes:=x1y2 areamult:=0.4 yoffset:=6 xoffset:=4400 xmult:=-1 notitle
+      icons    trains normal  route1@time2  axes:=x1y2  height:=4 yoffset:=-1.4
+      icons    trains normal  route2@time2  axes:=x1y2  xoffset:=4400 xmult:=-1 height:=3.5 yoffset:=-1.4 colour:="red"
+      # userdata   zeroline   1  2  lt:=5  lw:=0  notitle
+    end graph
+  end page # 3
+
+
+  begin page # ignore # 4
+    begin graph
+      title "Volume flows of air with crossing trains"
+      xlabel "Distance (m)"
+      ylabel "Volume flow (m^3/s)"
+      y2label "Elevation (m)" offset 0, -6.8
+      xrange -100 4500  500
+      yrange -430 380  50
+      y2range -36 126  10
+      begin verbatim
+        set y2tics ("-20" -20, "-10" -10, "0" 0,  "10" 10)
+        set key bottom left reverse Left
+        set linestyle 20 linecolor "yellow" linewidth 0
+        set arrow from first 2200, second -9 to first 2200, second -2 linestyle 6 linewidth 1
+      end verbatim
+      transient qtrains normal train1@0 lw:=1  xaxis:=chainage
+      transient qtrains normal train2@0 lw:=1  xaxis:=chainage xoffset:=4400 xmult:=-1
+      profile  qSES   normal  route1@time3 lt:=20
+      profile  qcold  normal  route1umd@time3 lt:=6 lw:=1
+      profile  elevations   normal  route1@0 lt:=7 lw:=1 yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route1@0 lt:=6 lw:=1  yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route2@0 lt:=6 lw:=1  axes:=x1y2 areamult:=0.4 yoffset:=6 xoffset:=4400 xmult:=-1 notitle
+      icons    trains normal  route1@time3  axes:=x1y2  height:=4 yoffset:=-1.4
+      icons    trains normal  route2@time3  axes:=x1y2  xoffset:=4400 xmult:=-1 height:=3.5 yoffset:=-1.4 colour:="red"
+      # userdata   zeroline   1  2  lt:=5  lw:=0  notitle
+    end graph
+  end page # 4
+
+
+
+  begin page # ignore # 5
+    begin graph
+      title "Volume flows of air and trains"
+      xlabel "Distance (m)"
+      ylabel "Volume flow (m^3/s)"
+      y2label "Elevation (m)" offset 0, -6.8
+      xrange -100 4500  500
+      yrange -430 380  50
+      y2range -36 126  10
+      begin verbatim
+        set y2tics ("-20" -20, "-10" -10, "0" 0,  "10" 10)
+        set key bottom left reverse Left
+        set linestyle 20 linecolor "yellow" linewidth 0
+        set arrow from first 2200, second -9 to first 2200, second -2 linestyle 6 linewidth 1
+      end verbatim
+      transient qtrains normal train1@0 lw:=1  xaxis:=chainage
+      transient qtrains normal train2@0 lw:=1  xaxis:=chainage xoffset:=4400 xmult:=-1
+      profile  qSES   normal  route1@time4 lt:=20
+      profile  qcold  normal  route1umd@time4 lw:=1
+      profile  elevations   normal  route1@0 lt:=7 lw:=1 yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route1@0 lt:=6 lw:=1  yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route2@0 lt:=6 lw:=1  axes:=x1y2 areamult:=0.4 yoffset:=6 xoffset:=4400 xmult:=-1 notitle
+      icons    trains normal  route1@time4  axes:=x1y2  height:=4 yoffset:=-1.4
+      icons    trains normal  route2@time4  axes:=x1y2  xoffset:=4400 xmult:=-1 height:=3.5 yoffset:=-1.4 colour:="red"
+      # userdata   zeroline   1  2  lt:=5  lw:=0  notitle
+    end graph
+  end page # 5
+
+  begin page # ignore # 6
+    begin graph
+      title "Volume flows of air and trains"
+      xlabel "Distance (m)"
+      ylabel "Volume flow (m^3/s)"
+      y2label "Elevation (m)" offset 0, -6.8
+      xrange -100 4500  500
+      yrange -430 380  50
+      y2range -36 126  10
+      begin verbatim
+        set y2tics ("-20" -20, "-10" -10, "0" 0,  "10" 10)
+        set key bottom left reverse Left
+        set linestyle 20 linecolor "yellow" linewidth 0
+        set arrow from first 2200, second -9 to first 2200, second -2 linestyle 6 linewidth 1
+        set arrow from first 3070, second -25 to first 3070, second -10 linestyle 4 linewidth 1
+        set label "{/*0.8 Subpoint 105-5m" at first 3070, second -27 centre
+      end verbatim
+      transient qtrains normal train1@0 lw:=1  xaxis:=chainage
+      transient qtrains normal train2@0 lw:=1  xaxis:=chainage xoffset:=4400 xmult:=-1
+      profile  qSES   normal  route1@time3 lt:=20
+      profile  qcold  normal  route1umd@time3 lw:=1
+      profile  elevations   normal  route1@0 lt:=7 lw:=1 yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route1@0 lt:=6 lw:=1  yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route2@0 lt:=6 lw:=1  axes:=x1y2 areamult:=0.4 yoffset:=6 xoffset:=4400 xmult:=-1 notitle
+      icons    trains normal  route1@time3  axes:=x1y2  height:=4 yoffset:=-1.4
+      icons    trains normal  route2@time3  axes:=x1y2  xoffset:=4400 xmult:=-1 height:=3.5 yoffset:=-1.4 colour:="red"
+      # userdata   zeroline   1  2  lt:=5  lw:=0  notitle
+    end graph
+  end page # 6
+
+
+  begin page # ignore # 7
+    begin graph
+      title "Tunnel and annulus areas"
+      xlabel "Distance (m)"
+      ylabel "Area (m^2)"
+      y2label "Elevation (m)" offset 0, -6.8
+      xrange -100 4500  500
+      yrange 0   35   5
+      y2range -36 126  10
+      begin verbatim
+        set y2tics ("-20" -20, "-10" -10, "0" 0,  "10" 10)
+        set key bottom left reverse Left
+        set linestyle 20 linecolor "yellow" linewidth 0
+        set arrow from first 2200, second -9 to first 2200, second -2 linestyle 6 linewidth 1
+        set arrow from first 3070, second -25 to first 3070, second -10 linestyle 4 linewidth 1
+        set label "{/*0.8 Subpoint 105-5m" at first 3070, second -27 centre
+      end verbatim
+      profile  area   normal  route1@0 lt:=4
+      profile  annulus  normal  route1umd@time3 lt:=3 lw:=1
+      profile  elevations   normal  route1@0 lt:=7 lw:=1 yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route1@0 lt:=6 lw:=1  yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route2@0 lt:=6 lw:=1  axes:=x1y2 areamult:=0.4 yoffset:=6 xoffset:=4400 xmult:=-1 notitle
+      icons    trains normal  route1@time3  axes:=x1y2  height:=4 yoffset:=-1.4
+      icons    trains normal  route2@time3  axes:=x1y2  xoffset:=4400 xmult:=-1 height:=3.5 yoffset:=-1.4 colour:="red"
+      # userdata   zeroline   1  2  lt:=5  lw:=0  notitle
+    end graph
+  end page # 7
+
+
+  begin page # ignore # 8
+    begin graph
+      title "Annulus air velocities"
+      xlabel "Distance (m)"
+      ylabel "Air velocity (m/s)"
+      y2label "Elevation (m)" offset 0, -6.8
+      xrange -100 4500  500
+      yrange -25   25   5
+      y2range -36 126  10
+      begin verbatim
+        set y2tics ("-20" -20, "-10" -10, "0" 0,  "10" 10)
+        set key bottom left reverse Left
+        set linestyle 20 linecolor "yellow" linewidth 0
+        set arrow from first 2200, second -9 to first 2200, second -2 linestyle 6 linewidth 1
+        set arrow from first 3070, second -25 to first 3070, second -10 linestyle 4 linewidth 1
+        set label "{/*0.8 Subpoint 105-5m" at first 3070, second -27 centre
+      end verbatim
+      profile  vSES   normal  route1@time3 lt:=4
+      profile  vcold  normal  route1umd@time3 lt:=3 lw:=1
+      profile  elevations   normal  route1@0 lt:=7 lw:=1 yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route1@0 lt:=6 lw:=1  yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route2@0 lt:=6 lw:=1  axes:=x1y2 areamult:=0.4 yoffset:=6 xoffset:=4400 xmult:=-1 notitle
+      icons    trains normal  route1@time3  axes:=x1y2  height:=4 yoffset:=-1.4
+      icons    trains normal  route2@time3  axes:=x1y2  xoffset:=4400 xmult:=-1 height:=3.5 yoffset:=-1.4 colour:="red"
+      # userdata   zeroline   1  2  lt:=5  lw:=0  notitle
+    end graph
+  end page # 8
+
+
+  begin page # ignore # 9
+    begin graph
+      title "Annulus air velocities"
+      xlabel "Distance (m)"
+      ylabel "Air velocity (m/s)"
+      y2label "Elevation (m)" offset 0, -6.8
+      xrange -100 4500  500
+      yrange -25   25   5
+      y2range -36 126  10
+      begin verbatim
+        set y2tics ("-20" -20, "-10" -10, "0" 0,  "10" 10)
+        set key bottom left reverse Left
+        set linestyle 20 linecolor "yellow" linewidth 0
+        set arrow from first 2200, second -9 to first 2200, second -2 linestyle 6 linewidth 1
+        set arrow from first 3070, second -25 to first 3070, second -10 linestyle 4 linewidth 1
+        set label "{/*0.8 Subpoint 105-5m" at first 3070, second -27 centre
+      end verbatim
+      profile  vSES   normal  route1@271 lt:=4
+      profile  vcold  normal  route1umd@271 lt:=3 lw:=1
+      profile  elevations   normal  route1@0 lt:=7 lw:=1 yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route1@0 lt:=6 lw:=1  yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route2@0 lt:=6 lw:=1  axes:=x1y2 areamult:=0.4 yoffset:=6 xoffset:=4400 xmult:=-1 notitle
+      icons    trains normal  route1@271  axes:=x1y2  height:=4 yoffset:=-1.4
+      icons    trains normal  route2@271  axes:=x1y2  xoffset:=4400 xmult:=-1 height:=3.5 yoffset:=-1.4 colour:="red"
+      # userdata   zeroline   1  2  lt:=5  lw:=0  notitle
+    end graph
+  end page # 9
+
+  begin page # ignore # 10
+    begin graph
+      title "Annulus air velocities"
+      xlabel "Distance (m)"
+      ylabel "Air velocity (m/s)"
+      y2label "Elevation (m)" offset 0, -6.8
+      xrange -100 4500  500
+      yrange -25   25   5
+      y2range -36 126  10
+      begin verbatim
+        set y2tics ("-20" -20, "-10" -10, "0" 0,  "10" 10)
+        set key bottom left reverse Left
+        set linestyle 20 linecolor "yellow" linewidth 0
+        set arrow from first 2200, second -9 to first 2200, second -2 linestyle 6 linewidth 1
+        set arrow from first 3070, second -25 to first 3070, second -10 linestyle 4 linewidth 1
+        set label "{/*0.8 Subpoint 105-5m" at first 3070, second -27 centre
+      end verbatim
+      profile  vSES   normal  route1@270 lt:=4
+      profile  vcold  normal  route1umd@270 lt:=3 lw:=1
+      profile  elevations   normal  route1@0 lt:=7 lw:=1 yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route1@0 lt:=6 lw:=1  yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route2@0 lt:=6 lw:=1  axes:=x1y2 areamult:=0.4 yoffset:=6 xoffset:=4400 xmult:=-1 notitle
+      icons    trains normal  route1@270  axes:=x1y2  height:=4 yoffset:=-1.4
+      icons    trains normal  route2@270  axes:=x1y2  xoffset:=4400 xmult:=-1 height:=3.5 yoffset:=-1.4 colour:="red"
+      # userdata   zeroline   1  2  lt:=5  lw:=0  notitle
+    end graph
+  end page # 10
+
+
+
+
+  begin timeloop # ignore # 1 (volume flows)
+    start  200
+    stop 292
+    step 1
+    begin graph
+      title "Volume flows of air and trains"
+      xlabel "Distance (m)"
+      ylabel "Volume flow (m^3/s)"
+      y2label "Elevation (m)" offset 0, -6.8
+      xrange -100 4500  500
+      yrange -430 380  50
+      y2range -36 126  10
+      begin verbatim
+        set y2tics ("-20" -20, "-10" -10, "0" 0,  "10" 10)
+        set key bottom left reverse Left
+        set linestyle 20 linecolor "yellow" linewidth 0
+        set arrow from first 2200, second -9 to first 2200, second -2 linestyle 6 linewidth 1
+      end verbatim
+      transient qtrains normal train1@0 lw:=1  xaxis:=chainage
+      transient qtrains normal train2@0 lw:=1  xaxis:=chainage xoffset:=4400 xmult:=-1
+      profile  qSES   normal  route1@*time lt:=20
+      profile  qcold  normal  route1umd@*time lw:=1
+      profile  elevations   normal  route1@0 lt:=7 lw:=1 yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route1@0 lt:=6 lw:=1  yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route2@0 lt:=6 lw:=1  axes:=x1y2 areamult:=0.4 yoffset:=6 xoffset:=4400 xmult:=-1 notitle
+      icons    trains normal  route1@*time  axes:=x1y2  height:=4 yoffset:=-1.4
+      icons    trains normal  route2@*time  axes:=x1y2  xoffset:=4400 xmult:=-1 height:=3.5 yoffset:=-1.4 colour:="red"
+      # userdata   zeroline   1  2  lt:=5  lw:=0  notitle
+    end graph
+  end timeloop # 1 (volume flows)
+
+
+  begin timeloop # ignore # 2 (air velocities)
+    start  200
+    stop 292
+    step 1
+    begin graph
+      title "Annulus air velocities and train velocities"
+      xlabel "Distance (m)"
+      ylabel "Air velocity (m/s)"
+      y2label "Elevation (m)" offset 0, -6.8
+      xrange -100 4500  500
+      yrange -25   25   5
+      y2range -36 126  10
+      begin verbatim
+        set y2tics ("-20" -20, "-10" -10, "0" 0,  "10" 10)
+        set key bottom left reverse Left
+        set linestyle 20 linecolor "yellow" linewidth 0
+        set arrow from first 2200, second -9 to first 2200, second -2 linestyle 6 linewidth 1
+      end verbatim
+      transient speed normal train1@0 lw:=1  xaxis:=chainage ydiv:=3.6
+      transient speed normal train2@0 lw:=1  xaxis:=chainage xoffset:=4400 xmult:=-1 ydiv:=3.6
+      profile  vSES   normal  route1@*time lt:=4
+      profile  vcold  normal  route1umd@*time lt:=3 lw:=1
+      profile  elevations   normal  route1@0 lt:=7 lw:=1 yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route1@0 lt:=6 lw:=1  yoffset:=-1 axes:=x1y2 notitle
+      profile  stacks   normal  route2@0 lt:=6 lw:=1  axes:=x1y2 areamult:=0.4 yoffset:=6 xoffset:=4400 xmult:=-1 notitle
+      icons    trains normal  route1@*time  axes:=x1y2  height:=4 yoffset:=-1.4
+      icons    trains normal  route2@*time  axes:=x1y2  xoffset:=4400 xmult:=-1 height:=3.5 yoffset:=-1.4 colour:="red"
+      # userdata   zeroline   1  2  lt:=5  lw:=0  notitle
+    end graph
+  end timeloop # 2 (air velocities)
+
+
+
+
+
+
+end plots

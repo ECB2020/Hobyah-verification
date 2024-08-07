@@ -1,0 +1,151 @@
+Test input file for Hobyah, a 1D tunnel vent program.
+September 2023
+
+This file verifies the flow development of simple airflow in Hobyah
+by comparing it to the equivalent SES calculation in the files
+"SES-066-sectype-changes.ses" and "SES-067-sectype-changes.ses"
+in terms of final air velocity and way the airflows rise from zero to
+steady-state.
+It generates a plot that can be used in the verification+validation
+document.
+
+
+This calculation has two tunnels that have friction, portal pressure
+losses and wind pressure.  The following ASCII art shows the tunnels,
+their portal pressures and the pressure loss factors relevant to the
+direction of flow through the tunnel.
+
+                           Loss at                           Loss at
+                           back end                          fwd end
+                           __________________________________________
+
+Tunnel Mainline1   +20 Pa   --> 2.6                         --> 0.85    0 Pa
+                           ------------------------------------------
+
+                           Loss at                           Loss at
+                           back end                          fwd end
+                           __________________________________________
+
+Tunnel Mainline2     0 Pa   <-- 2.2                         <-- 0.24  +20 Pa
+                           ------------------------------------------
+
+This file uses Moody's approximation for friction factor, and the
+Hobyah and SES calculations use the same roughness height (0.05 m).
+It appears from a study of the relevant SES routine (OMEGA2.FOR) that
+SES uses Moody's approximation for friction factor if there is no train
+in the segment and SES's approximation if there is a train in the segment.
+
+
+Results
+-------
+
+Air velocities at the back ends of tunnels Mainline1 and Mainline2 at
+the final timestep are:
+    Mainline1: +1.875064 m/s
+    Mainline2: -1.983952 m/s
+
+
+The SES runs "SES-066-sectype-changes.ses" and "SES-066-sectype-changes.ses"
+   give the following results:
+    +ve airflow: +1.878 m/s (compare to Mainline1 and Mainline3)
+    -ve airflow: -1.987 m/s (compare to Mainline2 and Mainline4)
+
+The incompressible calculations end up at 100.2% of the compressible
+calculations.  These are close enough that we can put the difference
+down to compressible versus incompressible.
+
+The graph plotted by this run shows the development of flow in the
+compressible and incompressible calculations.  They pretty much sit
+on top of one another, although the compressible calculation rises
+in steps every 8.7 seconds (this being the time it takes for a
+pressure wave to traverse the 1500 m long tunnel twice at the speed
+of sound, 343.8 m/s).
+
+
+begin settings  # Start of the input
+  version 1
+  runtype calc
+  frictiontype Darcy
+  # frictionapprox SES  # SES uses a modified approximation only for segments with trains.
+  frictionapprox Moody  # SES uses Moody's approximation for segments without trains.
+  QA1 4
+  QA2 Hobyah documentation images
+  QA3 Files that generate images used in the documentation
+  aero_step 0.1
+  aero_time 3000
+#  autokeys on
+  header underfoot
+end settings
+
+
+begin sectypes
+  West-C+C  92    45  0.05
+end sectypes
+
+
+# Define a tunnel with backward airflow and a set of portal pressure losses.
+begin tunnel Mainline2
+  back  0  portal 0  West-C+C  zeta_bf := 2.6  zeta_fb := 2.2
+  fwd  1500  portal 20  zeta_bf := 0.85  zeta_fb := 0.24
+end tunnel
+
+# Define a tunnel with forward airflow and a set of portal pressure losses.
+begin tunnel Mainline1
+  back  0  portal 20  West-C+C  zeta_bf := 2.6  zeta_fb := 2.2
+  fwd  1500  portal 0  zeta_bf := 0.85  zeta_fb := 0.24
+end tunnel
+
+
+begin plotcontrol # Detailed in the first 200 seconds, less detailed after.
+  aero  range(0, 200, 0.1) + range(200, duration, 2)
+end plotcontrol
+
+begin files nicknames
+ slug+ve SES-067-sectype-changes-pos.sbn
+ slug-ve SES-068-sectype-changes-neg.sbn
+end files
+
+begin constants
+v_low   -2.1
+v_high   2.1
+end constants
+
+begin plots
+  pagesize custom 11.3  9
+  fontsize 10
+  linewidth 1
+  begin page
+    begin graph
+      title   # Transient velocities, compressible and incompressible calculations
+      xrange  0  400  *100
+      yrange  v_low  v_high  *1
+      margins 0.1   0.95   0.5   0.95
+      verbatim set key centre right
+      xlabel   Time (sec)
+      ylabel   Velocity (m/s)
+      transient velocity  calc  Mainline1@0 lt:=5 lw:=3 "{/*0.8Forwards airflow, compressible calc}"
+      transient vcold  slug+ve 101-1b       lt:=1 lw:=1 "{/*0.8Forwards airflow, incompressible calc}"
+      transient velocity  calc  Mainline2@0 lt:=2 lw:=2 "{/*0.8Backwards airflow, compressible calc}"
+      transient vcold  slug-ve 101-1b       lt:=4 lw:=1 "{/*0.8Backwards airflow, incompressible calc}"
+#      transient velocity  calc  Mainline1@0 lt:=5 lw:=3 "{/*0.8Forwards airflow, compressible calc}"
+#      transient vcold  slug+ve 101-1b       lt:=6 lw:=1 "{/*0.8Forwards airflow, incompressible calc}"
+#      transient velocity  calc  Mainline2@0 lt:=7 lw:=2 "{/*0.8Backwards airflow, compressible calc}"
+#      transient vcold  slug-ve 101-1b       lt:=8 lw:=1 "{/*0.8Backwards airflow, incompressible calc}"
+    end graph
+    begin graph
+      title   "Detail of wave action in the compressible flow calculations" offset 0, -0.5 enhanced
+      xrange  0  55  8.726
+      yrange  -0.6  0.7  *1
+      margins 0.15   0.9   0.15    0.35
+      begin verbatim
+        set key centre right
+        set xtics ("0" 0, "8.7" 8.726, "17.5" 17.452, "26.2" 26.178 , \
+                   "34.9" 34.904, "43.6" 43.63, "52.4" 52.356 )
+      end verbatim
+      xlabel   Time (sec)
+      ylabel   Velocity (m/s)
+      transient velocity  calc  Mainline1@0 lt:=5 lw:=2 "{/*0.8Forwards airflow}"
+      transient velocity  calc  Mainline2@0 lt:=2 lw:=2 "{/*0.8Backwards airflow}"
+    end graph
+  end page
+end plots

@@ -1,0 +1,40 @@
+# Hobyah source file, "ok-040-traffic-verification.txt"
+# Timestamp & user, "14:39 on 25 Apr 2024 by ecb"
+# Project number, "2"
+# Project name, "Software testing"
+# Project description, "Files that work and test different capabilities"
+# 170th line, "profile ptot  calc  route1@-1 lw:=5"
+# Data file name, "ok-040-traffic-verification-p2-g1-c1.txt"
+#
+# Hobyah profile (transient data) QA
+# Name of binary, "ok-040-traffic-verification.hbn"
+# Source name, "ok-040-traffic-verification.txt"
+# Project no., "2"
+# Project name, "Software testing"
+# Description, "Files that work and test different capabilities"
+# Date created, "14:39 on 25 Apr 2024 by ecb"
+# Property plotted, ptot
+# Property description, total pressure
+# Original locator, route1@-1
+# Modified locator, route1@-1.0
+# Plot time wanted, -1.0
+# Plot time used, 5000.0
+#
+# X conversion key, "dist1", converting m to FT by dividing by 0.3048
+# Y conversion key, "press1", converting Pa to IWG by dividing by 249.08853408
+# Auto key, Total pressure along route "route1" at 5000 sec
+# Key used, "{/*0.65 Total pressure along route \"route1\" at 5000 sec}"
+# Multiplier on the X axis (applied first), 1.0
+# Offset added to the X axis (applied second), 0.0
+# Multiplier on the Y axis (applied first), 1.0
+# Offset added to the Y axis (applied second), 0.0
+# X value at which data starts being plotted, -inf
+# X value at which data stops being plotted, inf
+Distance,  Value,  Distance,  Value,  Plot Distance,  Plot value
+ (m),   (Pa),   (ft),   (IWG),   (m),   (Pa),  Location
+0.0,    19.99259745069139,    0.0,    0.08026301782429837,    0.0,    19.99259745069139,    # first@0.0
+40.0,    11.993499269359745,    131.23359580052494,    0.048149543750206435,    40.0,    11.993499269359745,    # first@40.0
+80.0,    3.9939495550788706,    262.4671916010499,    0.016034256935311724,    80.0,    3.9939495550788706,    # first@80.0
+120.0,    -4.00605177898251,    393.70078740157476,    -0.016082842968981794,    120.0,    -4.00605177898251,    # first@120.0
+160.0,    -12.006504819612019,    524.9343832020998,    -0.04820175631109491,    160.0,    -12.006504819612019,    # first@160.0
+200.0,    -20.007409653509967,    656.1679790026246,    -0.08032248343909788,    200.0,    -20.007409653509967,    # first@200.0

@@ -1,0 +1,201 @@
+Test input file for Hobyah, a 1D tunnel vent program.
+September 2023
+
+This file has two aims:
+
+  1) Compare flow and pressure profiles in tunnels with a change of
+     sectype (but to the same sectype) partway along.  The sum of
+     the pressure loss factors is the same as in the first two tunnels
+     that do not have a change of sectype.  The flows should be mostly
+     unaltered by the inclusion of the change of sectype.
+
+  2) Provide simple examples of flow in a tunnel of constant area
+     (driven by pressure difference) and show the equivalent
+     calculations in the incompressible quadratics spreadsheet is
+     close enough to verify the Hobyah calculation of friction,
+     pressure difference and losses.
+
+This calculation has four tunnels that test the setting of pressure
+loss factors at portals and at changes of sectype.  The following
+ASCII art shows the tunnels, their portal pressures and the pressure
+loss factors relevant to the direction of flow through the tunnel.
+
+                           Loss at                           Loss at
+                           back end                          fwd end
+                           __________________________________________
+
+Tunnel Mainline1   +20 Pa   --> 2.6                         --> 0.85    0 Pa
+                           ------------------------------------------
+
+                           Loss at                           Loss at
+                           back end                          fwd end
+                           __________________________________________
+
+Tunnel Mainline2     0 Pa   <-- 2.2                         <-- 0.24  +20 Pa
+                           ------------------------------------------
+
+
+                           Loss at         Loss at           Loss at
+                           back end        a change          fwd end
+                           __________________________________________
+
+Tunnel Mainline3   +20 Pa   --> 2.6        --> 0.42         --> 0.43    0 Pa
+                           ------------------------------------------
+
+                           Loss at         Loss at           Loss at
+                           back end        a change          fwd end
+                           __________________________________________
+
+Tunnel Mainline4     0 Pa   <-- 2.2        <-- 0.13         <-- 0.11  +20 Pa
+                           ------------------------------------------
+
+
+The sum of the left-to-right pressure losses in tunnels Mainline1 and
+Mainline3 are the same, even though they are set in different places.
+
+Likewise the sum of the right-to-left pressure losses in tunnels Mainline2
+Mainline4 are the same, even though they are set in different places.
+
+
+In a compressible flow calculation, moving pressure loss factors around
+affects the airflow, because there is a density gradient along the
+tunnel and pressure loss factors in different locations cause slightly
+different pressure drops.
+But if the pressure differentials are low (and 20 Pa is a low pressure
+differential) the differences are slight.
+
+Tunnels Mainline1 and Mainline2 ought to have near-identical velocities
+and mass flows but different pressure profiles, with airflow from left
+to right.
+
+Tunnels Mainline3 and Mainline4 ought to have near-identical velocities
+and mass flows but different pressure profiles, with airflow from right
+to left.
+
+Results
+-------
+
+1) Air velocities at the back ends of tunnels Mainline1 and Mainline3 at
+the final timestep are:
+    Mainline1: +2.511457 m/s
+    Mainline3: +2.511455 m/s
+
+Air velocities at the back ends of tunnels Mainline2 and Mainline4 at
+the final timestep are:
+    Mainline2: -2.792555 m/s
+    Mainline4: -2.792556 m/s
+
+The differences are so slight that the presence of the change of sectype
+having no significant effect is verified.
+
+
+2) The spreadsheet "slug-flow-ok-022-area-changes-verification.ods" gives
+   the following results:
+    +ve airflow: +2.511587 m/s (compare to Mainline1 and Mainline3)
+    -ve airflow: -2.792608 m/s (compare to Mainline2 and Mainline4)
+
+These are close enough to the compressible flow calculations (>99.99%)
+that we can put the difference down to compressible versus incompressible.
+
+
+
+begin settings  # Start of the input
+  version 1
+  runtype calc
+  frictiontype Darcy
+  QA1 4
+  QA2 Hobyah documentation images
+  QA3 Files that generate images used in the documentation
+  aero_step 0.1
+  aero_time 3000
+  autokeys on
+  header underfoot
+end settings
+
+
+begin sectypes
+  West-C+C  92    45  -0.01
+end sectypes
+
+
+# Define a tunnel with forward airflow and a set of portal pressure losses.
+begin tunnel Mainline1
+  back  0  portal 20  West-C+C  zeta_in := 2.6  zeta_out := 2.2
+  fwd  1500  portal 0  zeta_bf := 0.85  zeta_fb := 0.24
+end tunnel
+# The above is an example of the two ways in which portal pressure loss
+# factors can be set:
+#  * at the back end they are set by optional arguments zeta_in and
+#    zeta_out, (meaning airflow in and airflow out respectively).
+#  * at the forward end they are set by optional arguments zeta_bf and
+#    zeta_fb instead (meaning airflow in the directions back to forwards
+#    and forwards to backwards respectively).
+# Use whichever makes most sense to you.
+
+
+# Define a tunnel with backward airflow and a set of portal pressure losses.
+begin tunnel Mainline2
+  back  0  portal 0  West-C+C  zeta_bf := 2.6  zeta_fb := 2.2
+  fwd  1500  portal 20  zeta_out := 0.85  zeta_in := 0.24
+end tunnel
+# The above definitions define the portal pressure loss factors in the
+# opposite way to the definitions in tunnel Mainline1.
+
+
+# Define a tunnel with forward airflow, a set of portal pressure losses,
+# a change to the same sectype and pressure losses at the sectype.  The
+# sums of the pressure loss coefficients are the same as in "Mainline1".
+begin tunnel Mainline3
+  back  0  portal 20  West-C+C  zeta_in := 2.6  zeta_out := 2.2
+  change  750  West-C+C  zeta_bf := 0.42   zeta_fb := 0.13
+  fwd  1500  portal 0  zeta_bf := 0.43  zeta_fb := 0.11
+end tunnel
+
+
+# Define a tunnel with backward airflow, a set of portal pressure losses,
+# a change to the same sectype and pressure losses at the sectype.  The
+# sums of the pressure loss coefficients are the same as in "Mainline2".
+begin tunnel Mainline4
+  back  0  portal 0  West-C+C  zeta_in := 2.6  zeta_out := 2.2
+  fwd  1500  portal 20  zeta_bf := 0.43  zeta_fb := 0.13
+  change  750  West-C+C  zeta_bf := 0.42   zeta_fb := 0.11
+end tunnel
+
+begin plotcontrol # Detailed in the first 200 seconds, less detailed after.
+  aero  range(0, 200, 0.1) + range(200, duration, 2)
+end plotcontrol
+
+begin constants
+v_low   -3
+v_high   3
+end constants
+
+begin plots
+  pagesize custom 11.3  8
+  fontsize 10
+  linewidth 1
+  begin page
+    begin graph
+      title   Transient velocities at the back ends of the tunnels
+      xrange  0  3000  *100
+      yrange  v_low  v_high  *1
+      margins 0.1   0.95   0.64   0.93
+      verbatim set key centre right
+      xlabel   Time (sec)
+      ylabel   Velocity (m/s)
+      transient velocity  calc  Mainline1@0 lw:=1 "{/*0.8Forwards airflow}"
+      transient velocity  calc  Mainline2@0 lw:=1 "{/*0.8Backwards airflow}"
+    end graph
+    begin graph
+      title   Pressure profiles at the final timestep
+      btmargins 0.15   0.44
+      xrange  0  1500  200
+      yrange  0  20  2
+      xlabel   Distance (m)
+      ylabel   Pressure (Pa)
+      verbatim set key centre right
+      profile ptot  calc  Mainline1@3000 lw:=1 "{/*0.8Forwards airflow}"
+      profile ptot  calc  Mainline2@3000 lw:=1 "{/*0.8Backwards airflow}"
+    end graph
+  end page
+end plots

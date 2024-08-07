@@ -1,0 +1,40 @@
+# Hobyah source file, "ok-039-traffic-verification-redone.txt"
+# Timestamp & user, "11:38 on 24 Apr 2024 by ecb"
+# Project number, "2"
+# Project name, "Software testing"
+# Project description, "Files that work and test different capabilities"
+# 99th line, "profile velocity  calc  eastbound@-1"
+# Data file name, "ok-039-traffic-verification-redone-p1-g1-c1.txt"
+#
+# Hobyah profile (transient data) QA
+# Name of binary, "ok-039-traffic-verification-redone.hbn"
+# Source name, "ok-039-traffic-verification-redone.txt"
+# Project no., "2"
+# Project name, "Software testing"
+# Description, "Files that work and test different capabilities"
+# Date created, "11:38 on 24 Apr 2024 by ecb"
+# Property plotted, velocity
+# Property description, air velocity
+# Original locator, eastbound@-1
+# Modified locator, eastbound@-1.0
+# Plot time wanted, -1.0
+# Plot time used, 3000.0
+#
+# X conversion key, "dist1", converting m to FT by dividing by 0.3048
+# Y conversion key, "speed1", converting m/s to FPM by dividing by 0.00508
+# Auto key, Air velocity along route "eastbound" at 3000 sec
+# Key used, "{/*0.65 Air velocity along route \"eastbound\" at 3000 sec}"
+# Multiplier on the X axis (applied first), 1.0
+# Offset added to the X axis (applied second), 0.0
+# Multiplier on the Y axis (applied first), 1.0
+# Offset added to the Y axis (applied second), 0.0
+# X value at which data starts being plotted, -inf
+# X value at which data stops being plotted, inf
+Distance,  Value,  Distance,  Value,  Plot Distance,  Plot value
+ (m),   (m/s),   (ft),   (FPM),   (m),   (m/s),  Location
+0.0,    4.52523347258894,    0.0,    890.793990667114,    0.0,    4.52523347258894,    # filled@0.0
+40.0,    4.525371156298871,    131.23359580052494,    890.8210937596203,    40.0,    4.525371156298871,    # filled@40.0
+80.0,    4.525508854254971,    262.4671916010499,    890.8481996564904,    80.0,    4.525508854254971,    # filled@80.0
+120.0,    4.525646566459654,    393.70078740157476,    890.8753083581996,    120.0,    4.525646566459654,    # filled@120.0
+160.0,    4.525784292915096,    524.9343832020998,    890.9024198651764,    160.0,    4.525784292915096,    # filled@160.0
+200.0,    4.525922033624268,    656.1679790026246,    890.9295341780055,    200.0,    4.525922033624268,    # filled@200.0

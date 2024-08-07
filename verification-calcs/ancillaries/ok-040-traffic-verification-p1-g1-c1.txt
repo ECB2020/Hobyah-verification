@@ -1,0 +1,40 @@
+# Hobyah source file, "ok-040-traffic-verification.txt"
+# Timestamp & user, "14:39 on 25 Apr 2024 by ecb"
+# Project number, "2"
+# Project name, "Software testing"
+# Project description, "Files that work and test different capabilities"
+# 157th line, "profile velocity  calc  route1@-1 lw:=5"
+# Data file name, "ok-040-traffic-verification-p1-g1-c1.txt"
+#
+# Hobyah profile (transient data) QA
+# Name of binary, "ok-040-traffic-verification.hbn"
+# Source name, "ok-040-traffic-verification.txt"
+# Project no., "2"
+# Project name, "Software testing"
+# Description, "Files that work and test different capabilities"
+# Date created, "14:39 on 25 Apr 2024 by ecb"
+# Property plotted, velocity
+# Property description, air velocity
+# Original locator, route1@-1
+# Modified locator, route1@-1.0
+# Plot time wanted, -1.0
+# Plot time used, 5000.0
+#
+# X conversion key, "dist1", converting m to FT by dividing by 0.3048
+# Y conversion key, "speed1", converting m/s to FPM by dividing by 0.00508
+# Auto key, Air velocity along route "route1" at 5000 sec
+# Key used, "{/*0.65 Air velocity along route \"route1\" at 5000 sec}"
+# Multiplier on the X axis (applied first), 1.0
+# Offset added to the X axis (applied second), 0.0
+# Multiplier on the Y axis (applied first), 1.0
+# Offset added to the Y axis (applied second), 0.0
+# X value at which data starts being plotted, -inf
+# X value at which data stops being plotted, inf
+Distance,  Value,  Distance,  Value,  Plot Distance,  Plot value
+ (m),   (m/s),   (ft),   (FPM),   (m),   (m/s),  Location
+0.0,    8.739633253996034,    0.0,    1720.400246849613,    0.0,    8.739633253996034,    # first@0.0
+40.0,    8.74012628392532,    131.23359580052494,    1720.4972999852992,    40.0,    8.74012628392532,    # first@40.0
+80.0,    8.740619408470733,    262.4671916010499,    1720.5943717462073,    80.0,    8.740619408470733,    # first@80.0
+120.0,    8.741112627663394,    393.70078740157476,    1720.6914621384633,    120.0,    8.741112627663394,    # first@120.0
+160.0,    8.741605941534072,    524.9343832020998,    1720.7885711681242,    160.0,    8.741605941534072,    # first@160.0
+200.0,    8.742099350114142,    656.1679790026246,    1720.8856988413663,    200.0,    8.742099350114142,    # first@200.0
